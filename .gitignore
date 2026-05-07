@@ -47,13 +47,13 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-/[Ll]ibrary/
-/[Тt]emp/
-/[Оo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Уy]serSettings/
+[Ll]ibrary/
+[Тt]emp/
+[Оo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Уy]serSettings/
 *.csproj
 *.sln
 *.suo
