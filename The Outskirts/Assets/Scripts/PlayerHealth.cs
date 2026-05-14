@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
@@ -10,27 +11,45 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxLives = 5;
     [SerializeField] private GameObject[] fullHearts;
     [SerializeField] private GameObject[] emptyHearts;
+
+    [SerializeField] private GameObject gameOverPanel;
  
     private int currentLives;
+    private PlayerRespawn playerRespawn;
 
     void Start()
     {
         currentLives = maxLives;
+        playerRespawn = GetComponent<PlayerRespawn>();
         UpdateHeartsDisplay();
     }
 
-    void Update()
+    public void LoseLives()
     {
-
-    }
-    public void LoseLife()
-    {
-        PlayerRespawn player = GetComponent<PlayerRespawn>();
         currentLives--;
+
         if (currentLives <= 0)
         {
-            player.Respawn();
+            Die();
         }
+        else
+        {
+            if (playerRespawn != null)
+            {
+                playerRespawn.Respawn();
+            }
+        }
+        UpdateHeartsDisplay();
+    }
+    public void GetLives()
+    {
+        currentLives++;
+
+        if(currentLives >= maxLives)
+        {
+            currentLives = maxLives;
+        }
+        UpdateHeartsDisplay();
     }
     
     public void UpdateHeartsDisplay()
@@ -49,4 +68,32 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
+    private void Die()
+    {
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        Time.timeScale = 0f;
+    }
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            LoseLives();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            LoseLives();
+        }
+    }
+    
 }

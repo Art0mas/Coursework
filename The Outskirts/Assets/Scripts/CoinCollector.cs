@@ -5,15 +5,6 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerInventory player = collision.GetComponent<PlayerInventory>();

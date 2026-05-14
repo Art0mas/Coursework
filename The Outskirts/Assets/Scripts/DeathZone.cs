@@ -7,10 +7,12 @@ public class DeathZone : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerRespawn player = collision.GetComponent<PlayerRespawn>();
+        PlayerRespawn playerRespawn = collision.GetComponent<PlayerRespawn>();
+        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
         if(collision.CompareTag("Player"))
         {
-            player.Respawn();
+            playerHealth.LoseLives();
+            playerRespawn.Respawn();
         }
     }
 }
