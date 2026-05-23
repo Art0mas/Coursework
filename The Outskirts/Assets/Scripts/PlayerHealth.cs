@@ -16,30 +16,21 @@ public class PlayerHealth : MonoBehaviour
  
     private int currentLives;
     private PlayerRespawn playerRespawn;
+    private HeroKnight player;
 
     void Start()
     {
         currentLives = maxLives;
         playerRespawn = GetComponent<PlayerRespawn>();
+        player = GetComponent<HeroKnight>();
         UpdateHeartsDisplay();
     }
 
     public void LoseLives()
     {
         currentLives--;
-
-        if (currentLives <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            if (playerRespawn != null)
-            {
-                playerRespawn.Respawn();
-            }
-        }
         UpdateHeartsDisplay();
+        StartCoroutine(DeathSequenceRoutine());
     }
     public void GetLives()
     {
@@ -68,7 +59,26 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
-    private void Die()
+
+    public void FallIntoPit()
+    {
+        currentLives--;
+
+        if (currentLives <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            if (playerRespawn != null)
+            {
+                playerRespawn.Respawn();
+            }
+        }
+
+        UpdateHeartsDisplay();
+    }
+    public void Die()
     {
         if (gameOverPanel != null)
         {
@@ -76,11 +86,16 @@ public class PlayerHealth : MonoBehaviour
         }
         Time.timeScale = 0f;
     }
-    public void RestartGame()
+
+    public int GetCurrentLives()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        return currentLives;
     }
+    public void LoadCurrentLives(int loadedLives)
+    {
+        currentLives = loadedLives;
+    }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -95,5 +110,25 @@ public class PlayerHealth : MonoBehaviour
             LoseLives();
         }
     }
-    
+
+    private IEnumerator DeathSequenceRoutine()
+    {
+        player.DeathAnim();
+
+        yield return new WaitForSeconds(2.0f);
+
+        if (currentLives <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            if (playerRespawn != null)
+            {
+                player.ResetAnim();
+                playerRespawn.Respawn();
+            }
+        }
+    }
+
 }

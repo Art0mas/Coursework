@@ -2,33 +2,32 @@ using UnityEngine;
 
 public class LadderMovement : MonoBehaviour
 {
-    [Header("Налаштування")]
-    public float climbSpeed = 5f;
-
-    private bool isNearLadder = false; 
-    private bool isClimbing = false;  
+    [SerializeField] private float climbSpeed = 5f;
 
     private float verticalInput;
+    private bool isNearLadder = false;
+    private bool isClimbing = false;
+
     private Rigidbody2D rb;
     private float defaultGravity;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        defaultGravity = rb.gravityScale;
+        defaultGravity = rb.gravityScale; 
     }
 
     void Update()
     {
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (isNearLadder && Mathf.Abs(verticalInput) > 0f)
+        if (isNearLadder && Mathf.Abs(verticalInput) > 0.01f)
         {
             isClimbing = true;
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (isClimbing)
         {
@@ -41,7 +40,7 @@ public class LadderMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {
@@ -49,7 +48,7 @@ public class LadderMovement : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
         {

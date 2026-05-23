@@ -15,13 +15,18 @@ public class PlayerInventory : MonoBehaviour
         coinsCount.text = coins.ToString();
     }
 
-    void Update()
-    {
-        
-    }
     public void AddCoin()
     {
         coins++;
         coinsCount.text = coins.ToString();
+    }
+
+    public int GetCoins()
+    {
+        return coins;
+    }
+    public void LoadCoins(int loadedCoins)
+    {
+        coins = loadedCoins;
     }
 }

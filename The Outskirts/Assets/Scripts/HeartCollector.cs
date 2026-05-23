@@ -7,6 +7,7 @@ public class HeartCollector : MonoBehaviour
 {
     [SerializeField] private float floatHeight = 0.2f;
     [SerializeField] private float floatSpeed = 2f;
+    [SerializeField] private AudioSource heartAudio;
 
     private Vector3 startPos;
 
@@ -26,6 +27,7 @@ public class HeartCollector : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             player.GetLives();
+            heartAudio.Play();
             gameObject.SetActive(false);
         }
     }

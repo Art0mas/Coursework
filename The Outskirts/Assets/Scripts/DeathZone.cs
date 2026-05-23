@@ -9,10 +9,12 @@ public class DeathZone : MonoBehaviour
     {
         PlayerRespawn playerRespawn = collision.GetComponent<PlayerRespawn>();
         PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-        if(collision.CompareTag("Player"))
+
+        if (collision.CompareTag("Player"))
         {
-            playerHealth.LoseLives();
+            playerHealth.FallIntoPit();
             playerRespawn.Respawn();
         }
+
     }
 }

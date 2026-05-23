@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -13,10 +14,6 @@ public class PlayerRespawn : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        
-    }
     public void Respawn()
     {
         transform.position = respawnPoint.position;
@@ -26,4 +23,6 @@ public class PlayerRespawn : MonoBehaviour
     {
         respawnPoint = newPoint;
     }
+    
+    
 }
