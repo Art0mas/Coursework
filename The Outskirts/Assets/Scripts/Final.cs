@@ -42,6 +42,8 @@ public class Final : MonoBehaviour
         color.a = 1f;
         blackBackground.color = color;
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         yield return new WaitForSecondsRealtime(1.0f);
 

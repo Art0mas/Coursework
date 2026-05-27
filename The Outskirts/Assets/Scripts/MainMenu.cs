@@ -29,7 +29,6 @@ public class MainMenu : MonoBehaviour
         {
             Time.timeScale = 1f; 
             await SaveGameManager.Instance.LoadLatestSaveAsync();
-            Debug.Log("Гру завантажено");
         }
         else
         {

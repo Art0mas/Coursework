@@ -11,7 +11,6 @@ public class PuzzleDoor : MonoBehaviour
     [SerializeField] private bool testOpen = false;
     
     private bool isOpened = false;
-    private bool isAnimActivate = false;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -30,7 +29,6 @@ public class PuzzleDoor : MonoBehaviour
     private void OpenDoor()
     {
         isOpened = true;
-        isAnimActivate = true;
         anim.SetTrigger("Activate");
     } 
 }

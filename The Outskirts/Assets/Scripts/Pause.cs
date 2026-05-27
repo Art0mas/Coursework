@@ -13,6 +13,9 @@ public class Pause : MonoBehaviour
     private bool isPause = false;
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         pausePanel.SetActive(false);
         settingsPanel.SetActive(false);
         saveText.SetActive(false);
@@ -27,12 +30,18 @@ public class Pause : MonoBehaviour
     }
     public void PauseGame()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isPause = true;
     }
     public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPause = false;
@@ -52,7 +61,7 @@ public class Pause : MonoBehaviour
         {
             await SaveGameManager.Instance.SaveProgressAsync(playerHealth, playerInventory);
             saveText.SetActive(true);
-            await Task.Delay(2000);
+            await Task.Delay(1500);
             saveText.SetActive(false);
         }
 

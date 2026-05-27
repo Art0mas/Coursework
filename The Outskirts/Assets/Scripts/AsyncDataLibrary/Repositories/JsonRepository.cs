@@ -11,7 +11,7 @@ namespace AsyncDataLibrary.Repositories
 {
     public class JsonRepository<T> : IRepository<T> where T : IEntity
     {
-        private string? _filePath;
+        private string _filePath;
         private IDataSerializer _serializer;
         private FileStorageProvider _fileProvider;
         public JsonRepository(string filePath, IDataSerializer serializer, FileStorageProvider fileProvider)

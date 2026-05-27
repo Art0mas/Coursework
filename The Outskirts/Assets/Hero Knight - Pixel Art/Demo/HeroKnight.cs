@@ -13,7 +13,6 @@ public class HeroKnight : MonoBehaviour {
     private Sensor_HeroKnight groundSensor;
     private bool isGrounded = false;
     private bool isDead = false; 
-    private int facingDirection = 1;
     private float delayToIdle = 0.0f;
     private float currentSpeed;
 
@@ -46,13 +45,11 @@ public class HeroKnight : MonoBehaviour {
         if (inputX > 0)
         {
             GetComponent<SpriteRenderer>().flipX = false;
-            facingDirection = 1;
         }
             
         else if (inputX < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
-            facingDirection = -1;
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
